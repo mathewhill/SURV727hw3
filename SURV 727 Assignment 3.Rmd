@@ -42,6 +42,15 @@ for (i in 1:length(tables)) {
 }
 ```
 
+```{r}
+historical_population <- html_table(tables[[2]], fill = TRUE) #identified table 2 as the historical population table
+
+historical_population_df <- as.data.frame(historical_population)
+
+print(historical_population_df)
+```
+
+
 Extract the “Historical population” table from the list and save it as another object. You can use subsetting via [[...]] to extract pieces from a list. Print the result.
 You will see that the table needs some additional formatting. We only want rows and columns
 with actual values (I called the table object pop).
