@@ -54,6 +54,29 @@ print(historical_population_df)
 Extract the “Historical population” table from the list and save it as another object. You can use subsetting via [[...]] to extract pieces from a list. Print the result.
 You will see that the table needs some additional formatting. We only want rows and columns
 with actual values (I called the table object pop).
+```{r}
+historical_population_df$Pop. <- gsub(",", "", historical_population_df$Pop.)
+```
+
+
+```{r}
+historical_population_df$Pop. <- as.numeric(historical_population_df$Pop.)
+
+print(sum(is.na(historical_population_df$Pop.)))
+
+```
+```{r}
+pop_clean <- data.frame(historical_population_df$Census, historical_population_df$Pop.)
+```
+
+
+```{r}
+pop_clean <- pop_clean %>%
+  filter(historical_population_df.Pop. %% 1 == 0)              
+
+print(pop_clean)
+```
+
 
 # pop <- pop[2:10, -3]
 # pop
