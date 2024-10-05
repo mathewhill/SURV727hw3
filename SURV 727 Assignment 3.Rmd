@@ -29,9 +29,18 @@ url <- read_html("https://en.wikipedia.org/wiki/Grand_Boulevard,_Chicago")
 ```
 
 ```{r}
-nds <- html_nodes(url, xpath = '//*[contains(concat( " ", @class, " " ), concat( " ", "us-census-pop-left", " " ))]')
-```
+tables <- html_nodes(url, "table")
 
+str(tables)
+```
+```{r}
+for (i in 1:length(tables)) {
+  cat("Table", i, ":\n")
+  table_i <- html_table(tables[[i]], fill = TRUE)
+  print(head(table_i))
+  cat("\n\n")
+}
+```
 
 Extract the “Historical population” table from the list and save it as another object. You can use subsetting via [[...]] to extract pieces from a list. Print the result.
 You will see that the table needs some additional formatting. We only want rows and columns
