@@ -242,6 +242,7 @@ word_counts <- tidy_text_clean %>%
 
 print(word_counts)
 ```
+The most common word appears to be "park," with a frequency of 126. This is followed by "Chicago," with a frequency of 108 and "hyde," which has a frequency of 75.
 
 
 Plot the most common words within each location. What are some of the similarities between the locations? What are some of the differences?
