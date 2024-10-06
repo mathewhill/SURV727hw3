@@ -260,5 +260,5 @@ word_counts %>%
   facet_wrap(~ location, scales = "free_y") +  
   labs(x = "Frequency", y = NULL, title = "Most Common Words by Location Around Chicago")
 ```
-
+Some of the common words among these 9 areas are "Chicago," "street," "park," and "neighborhood." Other words such as "chinatown," "irish," and "school" appear to be less frequent across Chicago and uniquely common to specific areas. Generally, most cities include the at least one of the words that make up their name as well.
 
