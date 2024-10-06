@@ -246,3 +246,19 @@ The most common word appears to be "park," with a frequency of 126. This is foll
 
 
 Plot the most common words within each location. What are some of the similarities between the locations? What are some of the differences?
+```{r}
+library(ggplot2)
+
+word_counts <- tidy_text_clean %>%
+  group_by(location) %>%
+  count(word, sort = TRUE) %>%
+  top_n(5, n) 
+
+word_counts %>%
+  ggplot(aes(x = n, y = reorder(word, n), fill = location)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ location, scales = "free_y") +  
+  labs(x = "Frequency", y = NULL, title = "Most Common Words by Location Around Chicago")
+```
+
+
