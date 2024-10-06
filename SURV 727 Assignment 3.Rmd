@@ -112,6 +112,12 @@ print(east_community_areas)
 
 We want to use this list to create a loop that extracts the population tables from the Wikipedia pages of these places. To make this work and build valid urls, we need to replace empty spaces in the character vector with underscores. This can be done with gsub(), or by hand. The resulting vector should look like this: “Oakland,_Chicago” “Kenwood,_Chicago” “Hyde_Park,_Chicago”
 
+```{r}
+east_community_gsub <- gsub(" ", "_", new_grand_blvd_adj$X3)
+
+print(east_community_gsub)
+```
+
 To prepare the loop, we also want to copy our pop table and rename it as pops. In the loop, we append this table by adding columns from the other community areas.
 
 # pops <- pop
