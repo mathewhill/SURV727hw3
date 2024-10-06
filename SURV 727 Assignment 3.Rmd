@@ -119,8 +119,10 @@ print(east_community_gsub)
 ```
 
 To prepare the loop, we also want to copy our pop table and rename it as pops. In the loop, we append this table by adding columns from the other community areas.
+```{r}
+pops <- pop_clean
+```
 
-# pops <- pop
 
 Build a small loop to test whether you can build valid urls using the vector of places and pasting each element of it after https://en.wikipedia.org/wiki/ in a for loop. Calling url shows the last url of this loop, which should be https://en.wikipedia.org/wiki/Hyde_Park,_Chicago.
 
