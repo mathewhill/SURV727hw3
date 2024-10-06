@@ -176,7 +176,7 @@ First, scrape just the text without any of the information in the margins or hea
 ```{r}
 gb_url <- "https://en.wikipedia.org/wiki/Grand_Boulevard,_Chicago" 
 
-age <- read_html(gb_url)
+page <- read_html(gb_url)
 
 description <- page %>%
   html_nodes(xpath = '//p') %>%   
@@ -189,6 +189,28 @@ print(description)
 ```
 
 Using a similar loop as in the last section, grab the descriptions of the various communities areas. Make a tibble with two columns: the name of the location and the text describing the location.
+```{r}
+community_descriptions <- list()
+
+for (i in all_community_gsub) {
+  url <- paste0("https://en.wikipedia.org/wiki/", i)
+  
+  try({
+    page <- read_html(url)
+    
+    description <- page %>%
+      html_nodes(xpath = '//p') %>%
+      html_text()
+    
+    description <- description %>%
+      paste(collapse = ' ')
+    
+    community_descriptions[[i]] <- description
+    
+  }, silent = TRUE)  
+}
+```
+
 
 
 Let’s clean the data using tidytext. If you have trouble with this section, see the example shown in https://www.tidytextmining.com/tidytext.html
