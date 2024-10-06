@@ -77,14 +77,38 @@ pop_clean <- pop_clean %>%
 print(pop_clean)
 ```
 
-
-# pop <- pop[2:10, -3]
-# pop
-
 Expanding to More Pages
 That’s it for this page. However, we may want to repeat this process for other community areas. The Wikipedia page https://en.wikipedia.org/wiki/Grand_Boulevard,_Chicago has a section on “Places adjacent to Grand Boulevard, Chicago” at the bottom. Can you find the corresponding table in the list of tables that you created earlier? Extract this table as a new object.
+```{r}
+for (i in 1:length(tables)) {
+  cat("Table", i, ":\n")
+  table_i <- html_table(tables[[i]], fill = TRUE)
+  print(head(table_i))
+  cat("\n\n")
+}
+```
+
+```{r}
+grand_blvd_adj <- html_table(tables[[4]], fill = TRUE) #identified table 4 as the historical population table
+
+print(grand_blvd_adj)
+```
+
+```{r}
+new_grand_blvd_adj <- grand_blvd_adj %>%
+  filter(str_ends(X3, "Chicago"))              
+
+print(new_grand_blvd_adj)
+```
+
 
 Then, grab the community areas east of Grand Boulevard and save them as a character vector. Print the result.
+```{r}
+east_community_areas <- as.character(new_grand_blvd_adj$X3)
+
+print(east_community_areas)
+```
+
 
 We want to use this list to create a loop that extracts the population tables from the Wikipedia pages of these places. To make this work and build valid urls, we need to replace empty spaces in the character vector with underscores. This can be done with gsub(), or by hand. The resulting vector should look like this: “Oakland,_Chicago” “Kenwood,_Chicago” “Hyde_Park,_Chicago”
 
