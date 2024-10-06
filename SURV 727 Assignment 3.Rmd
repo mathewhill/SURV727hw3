@@ -133,8 +133,40 @@ for(i in east_community_gsub) {
 print(url)
 ```
 
-
 Finally, extend the loop and add the code that is needed to grab the population tables from each page. Add columns to the original table pops using cbind().
+```{r}
+new_list <- c(new_grand_blvd_adj$X1, new_grand_blvd_adj$X2, new_grand_blvd_adj$X3)
+
+all_community_gsub <- gsub(" ", "_", new_list)
+
+print(all_community_gsub)
+```
+
+
+```{r}
+pop_tables <- list()
+
+for (i in all_community_gsub) {
+  url <- paste0("https://en.wikipedia.org/wiki/", i)
+  
+  try({
+    page <- read_html(url)
+    
+    tables <- page %>%
+      html_node(xpath = "//table[contains(., 'Historical population')]") %>%
+      html_table(fill = TRUE)
+    pop_tables[[i]] <- tables
+  }, silent = TRUE)  
+}
+
+str(pop_tables)
+
+combined_pop_table <- do.call(rbind, pop_tables)
+
+pops <- cbind(pops, combined_pop_table)
+
+print(pops)
+```
 
 Scraping and Analyzing Text Data
 
