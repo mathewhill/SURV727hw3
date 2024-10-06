@@ -228,5 +228,20 @@ library(tidytext)
 ```
 
 Create tokens using unnest_tokens. Make sure the data is in one-token-per-row format. Remove any stop words within the data. What are the most common words used overall?
+```{r}
+tidy_text <- name_and_text_tibble %>%
+  unnest_tokens(word, description)
+
+data("stop_words")
+tidy_text_clean <- tidy_text %>%
+  anti_join(stop_words, by = "word")
+```
+```{r}
+word_counts <- tidy_text_clean %>%
+  count(word, sort = TRUE)
+
+print(word_counts)
+```
+
 
 Plot the most common words within each location. What are some of the similarities between the locations? What are some of the differences?
