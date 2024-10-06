@@ -211,7 +211,15 @@ for (i in all_community_gsub) {
 }
 ```
 
+```{r}
+name_and_text_tibble <- tibble(
+  location = all_community_gsub,
+  description = unlist(community_descriptions)
+)
 
+print(name_and_text_tibble$location)
+print(name_and_text_tibble$description)
+```
 
 Let’s clean the data using tidytext. If you have trouble with this section, see the example shown in https://www.tidytextmining.com/tidytext.html
 
