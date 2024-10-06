@@ -173,10 +173,23 @@ Scraping and Analyzing Text Data
 Suppose we wanted to take the actual text from the Wikipedia pages instead of just the information in the table. Our goal in this section is to extract the text from the body of the pages, then do some basic text cleaning and analysis.
 
 First, scrape just the text without any of the information in the margins or headers. For example, for “Grand Boulevard”, the text should start with, “Grand Boulevard on the South Side of Chicago, Illinois, is one of the ...”. Make sure all of the text is in one block by using something like the code below (I called my object description).
+```{r}
+gb_url <- "https://en.wikipedia.org/wiki/Grand_Boulevard,_Chicago" 
 
-# description <- description %>% paste(collapse = ' ')
+age <- read_html(gb_url)
+
+description <- page %>%
+  html_nodes(xpath = '//p') %>%   
+  html_text()                     
+
+description <- description %>%
+  paste(collapse = ' ')
+
+print(description)
+```
 
 Using a similar loop as in the last section, grab the descriptions of the various communities areas. Make a tibble with two columns: the name of the location and the text describing the location.
+
 
 Let’s clean the data using tidytext. If you have trouble with this section, see the example shown in https://www.tidytextmining.com/tidytext.html
 
